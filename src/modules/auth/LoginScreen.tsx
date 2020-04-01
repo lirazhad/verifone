@@ -33,7 +33,7 @@ const LoginScreen: React.FC = () => {
             .max(100)
             .required()
     });
-    const initialValues: LoginForm = {email: '', password: ''};
+    const initialValues: LoginForm = {email: 'naomi@globalbit.co.il', password: 'ANqSnESL$H)$NudMibcbIXpM'};
     return (
     <>
                 <LoginBackground source={images.splash} />

@@ -13,7 +13,7 @@ import _ from 'lodash';
 import {logout} from '../auth/redux/userSessionSlice';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NavigationStackProp} from 'react-navigation-stack';
-import Example from "../../components/Example";
+import {useTranslation} from 'react-i18next';
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>;
@@ -27,6 +27,7 @@ interface Item {
     pricingDescription: string;
 }
 const HomeScreen: React.FC<IProps> = ({navigation}) => {
+    const {t} = useTranslation();
     const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
@@ -40,7 +41,7 @@ const HomeScreen: React.FC<IProps> = ({navigation}) => {
     return (
         <>
             <HomeHeaderContainer>
-                <Header variant={'HOME'} text={'D'} backgroundColor={Colors.HEADER_COLOR} />
+                <Header variant={'HOME'} text={t('products')} backgroundColor={Colors.HEADER_COLOR} />
             </HomeHeaderContainer>
             <SafeContainer>
                 <KeyboardAwareScrollView>
@@ -85,7 +86,6 @@ const SafeContainer = styled.SafeAreaView`
 const ItemsContainer = styled.View`
     flex-direction: row;
     flex-flow: row wrap;
-    flex: 1;
     width: 100%;
     align-items: center;
     justify-content: space-around;

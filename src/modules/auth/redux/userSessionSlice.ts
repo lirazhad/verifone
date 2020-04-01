@@ -76,8 +76,7 @@ export const login: AppThunk = ({email, password}: LoginDto) => async (dispatch:
         await setJwtToken(response.token);
         dispatch(signInSuccess(response));
         NavigationService.navigate('HomeScreen');
-    } catch(err) {
-        console.log('error --', err)
+    } catch {
         ToastService.show('Bad credentials, please try again');
         dispatch(signInFailed());
     }

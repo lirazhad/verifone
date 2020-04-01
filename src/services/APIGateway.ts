@@ -12,7 +12,7 @@ interface Item {
 }
 
 const API = axios.create({
-    baseURL: Config.API_URL
+    baseURL: 'https://verifone.dev.globalbit.io/'
 });
 
 export const setJwtToken = async (token: string) => {

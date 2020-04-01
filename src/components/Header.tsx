@@ -24,7 +24,7 @@ const Header: React.FC<IProps> = ({variant, text, backgroundColor, cartLogoButto
     const cartQuantity = useSelector((state: RootState) => state.cart.sumOfItems);
     return (
         <HeaderContainer color={backgroundColor}>
-            {(variant === 'HOME') || (variant === 'ITEM') && (  //TODO DONT WORK OTHERWISE
+            {((variant === 'HOME') || (variant === 'ITEM')) && (  
 
                 <RightHeaderButton
                     onPress={() => {
@@ -111,7 +111,7 @@ const RightHeaderButton = styled.TouchableOpacity`
     align-items: center;
     align-content: center;
     position: absolute;
-    right: 0;
+    right: 5;
     top: 10px;
     margin: 5px;
 `;

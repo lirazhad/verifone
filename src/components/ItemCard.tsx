@@ -65,7 +65,6 @@ const Container = styled.View`
     align-items: center;
     margin: 15px 30px 15px 30px;
     flex-shrink: 0;
-    flex-grow: 0;
     flex-basis: 100px;
 `;
 
