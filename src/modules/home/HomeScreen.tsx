@@ -64,7 +64,7 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
                 return (
                 <ListItem 
                 item={item.item} 
-                isSelected={itemStore.isSelected}/>)
+                onSelect={itemStore.addToCart}/>)
                 }}
             />
 
@@ -73,18 +73,13 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
 
           renderSectionHeader={({section}) => (
               <View style={{
+                  height: 152,
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   backgroundColor: Colors.BUTTON_BLUE,
                   padding: 8}}>
                <Text style={{
-                paddingTop: 2,
-                paddingBottom: 2,
-                paddingLeft: 10,
-                paddingRight: 10,
-                fontSize: 22,
-                fontWeight: 'bold',
-                color: '#fff',
+                fontSize: 42
               }}>{section.title}</Text>   
               </View>
             

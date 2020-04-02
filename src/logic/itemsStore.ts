@@ -7,8 +7,20 @@ export class ItemStore {
     cashRegister: any = observable([])
     relatedProducts: any = observable([])
 
+    cart: any = observable([])
+
     @observable activityIndecator: boolean = false
-    @observable isSelected: boolean = false
+
+    @action
+    addToCart = (addOrRemove: boolean, itemToAdd: any) => {
+        if(addOrRemove){
+            this.cart = this.cart.filter(function( obj: any ) {
+                return obj.id !== itemToAdd.id;
+              });
+        }else{
+            this.cart.push(itemToAdd)
+        }
+    }
 
 
     @action
@@ -29,15 +41,6 @@ export class ItemStore {
                     cashRegister.push(data[key])
                 }
             });
-
-            // console.log(this.terminals)
-            // console.log('----------------------------------------')
-            // console.log(this.cashRegister)
-
-
-            //  this.terminals.replace(data[0])
-            //  this.cashRegister.replace(data[1])
-             //this.relatedProducts.replace(data[2])
 
             this.activityIndecator = false
         }else{

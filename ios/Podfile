@@ -39,6 +39,7 @@ target 'verifone' do
   pod 'RNExitApp', :path => '../node_modules/react-native-exit-app'
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
   target 'verifoneTests' do
     inherit! :search_paths
