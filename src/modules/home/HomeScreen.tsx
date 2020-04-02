@@ -14,9 +14,13 @@ import {logout} from '../auth/redux/userSessionSlice';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {useTranslation} from 'react-i18next';
+import { inject, observer } from 'mobx-react'
+import { SectionList, FlatList, Text, View } from 'react-native'
+import ListItem from '../../components/ListItem'
 
 interface IProps extends NavigationScreenProp<object> {
-    navigation: NavigationStackProp<null>;
+    navigation: NavigationStackProp<null>
+    itemStore: any
 }
 interface Item {
     id: number;
@@ -26,21 +30,68 @@ interface Item {
     price: number;
     pricingDescription: string;
 }
-const HomeScreen: React.FC<IProps> = ({navigation}) => {
+
+
+const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation, itemStore})=> {
     const {t} = useTranslation();
-    const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchItems());
+        itemStore.fetchData()
     }, []);
-
-    const itemsGroupedByCategory = useSelector((state: RootState) =>
-        selectItemsGroupedByCategory(state)
-    );
-
+    
     return (
         <>
-            <HomeHeaderContainer>
+        <SectionList
+          sections={[
+            {
+              title: t('docks'),
+              data: [itemStore.terminals.toJS()],
+            },
+            {
+              title: t('cashiers'),
+              data: [itemStore.cashRegister.toJS()],
+            }
+           
+          ]}
+
+          renderItem={(item: any) => {
+              console.log(item.item)
+              return(
+                <FlatList
+                data={item.item}
+                numColumns={3}
+                renderItem={(item: any) =>{
+                return (
+                <ListItem 
+                item={item.item} 
+                isSelected={itemStore.isSelected}/>)
+                }}
+            />
+
+              )
+          }}
+
+          renderSectionHeader={({section}) => (
+              <View style={{
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  backgroundColor: Colors.BUTTON_BLUE,
+                  padding: 8}}>
+               <Text style={{
+                paddingTop: 2,
+                paddingBottom: 2,
+                paddingLeft: 10,
+                paddingRight: 10,
+                fontSize: 22,
+                fontWeight: 'bold',
+                color: '#fff',
+              }}>{section.title}</Text>   
+              </View>
+            
+          )}
+          keyExtractor={(item: string, index: number) => index}
+        />
+            {/* <HomeHeaderContainer>
                 <Header variant={'HOME'} text={t('products')} backgroundColor={Colors.HEADER_COLOR} />
             </HomeHeaderContainer>
             <SafeContainer>
@@ -69,10 +120,11 @@ const HomeScreen: React.FC<IProps> = ({navigation}) => {
                         );
                     })}
                 </KeyboardAwareScrollView>
-            </SafeContainer>
+            </SafeContainer> */}
         </>
     );
-};
+}));
+
 const HomeHeaderContainer = styled.View`
     margin-top: 20px;
     height: 50px;

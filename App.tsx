@@ -14,6 +14,10 @@ import ToastService from './src/services/ToastService';
 // import {restoreSession} from './src/modules/auth/redux/userSessionSlice';
 // import {PersistGate} from 'redux-persist/integration/react';
 // import {store,persistor} from './src/services/store'
+import { observer, Provider } from "mobx-react"
+import { ItemStore } from './src/logic/itemsStore'
+
+const itemStore = new ItemStore()
 
 const App = () => {
     const isModalVisible = useSelector((state: RootState) => state.app.isModalVisible);
@@ -21,7 +25,6 @@ const App = () => {
     const {isConnected} = useNetInfo();
 
     useEffect(() => {
-        // dispatch(restoreSession());
         SplashScreen.hide();
     }, []);
 
@@ -36,6 +39,7 @@ const App = () => {
     return (
         <>
             {/*<PersistGate loading={null} persistor={persistor}>*/}
+            <Provider itemStore={itemStore}>
             <Toast
                 ref="toast"
                 style={{backgroundColor: 'red'}}
@@ -54,6 +58,7 @@ const App = () => {
                 visible={isModalVisible}
             />
             <Navigator ref={NavigationService.setTopLevelNavigator} />
+            </Provider>
             {/*</PersistGate>*/}
         </>
     );

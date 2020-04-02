@@ -14,6 +14,7 @@
     "generate-types-local": "dtsgen -o schema.d.ts --url https://verifone.dev.globalbit.io/api-json -n \"\""
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
     "@react-native-community/async-storage": "^1.7.1",
     "@react-navigation/native": "^3.6.2",
     "@types/redux-logger": "^3.0.7",
@@ -22,6 +23,8 @@
     "i18next": "^19.0.2",
     "install": "^0.13.0",
     "lodash": "^4.17.15",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "16.9.0",
     "react-i18next": "^11.2.7",
     "react-native": "0.61.5",
