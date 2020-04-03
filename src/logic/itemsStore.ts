@@ -10,6 +10,8 @@ export class ItemStore {
     cart: any = observable([])
 
     @observable activityIndecator: boolean = false
+    @observable cartItemNumber: number = 0
+
 
     @action
     addToCart = (addOrRemove: boolean, itemToAdd: any) => {
@@ -17,8 +19,12 @@ export class ItemStore {
             this.cart = this.cart.filter(function( obj: any ) {
                 return obj.id !== itemToAdd.id;
               });
+
+              this.cartItemNumber--
+              
         }else{
             this.cart.push(itemToAdd)
+            this.cartItemNumber++
         }
     }
 
@@ -50,12 +56,4 @@ export class ItemStore {
         }
     }
 
-}
-
-const dataParse = (items: any): [] => {
-    let result:[] = [];
-    Object.keys(items).forEach(function(key: any){
-        result.push(result[key]);
-    });
-    return result;
 }

@@ -54,7 +54,7 @@ const ListItem: React.FC<IProps> = observer(({item, onSelect}) => {
 const styles = StyleSheet.create({
     container: {
         width: screenWidth/3 , 
-        height: 580, 
+        height: 380, 
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 3,
@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
     imageWrapper: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 225,
-        height: 353
+        width: 162,
+        height: 180
     },
     buttonWrapper: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 54,
-        height: 54,
+        width: 40,
+        height: 40,
     },
     buttonImage:{
         width: '100%',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
      },
     productName: {
-       fontSize: 25,
+       fontSize: 22,
        margin: 8
     }
   })

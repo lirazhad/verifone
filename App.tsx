@@ -11,11 +11,9 @@ import {RootState} from './src/services/rootReducer';
 import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-easy-toast';
 import ToastService from './src/services/ToastService';
-// import {restoreSession} from './src/modules/auth/redux/userSessionSlice';
-// import {PersistGate} from 'redux-persist/integration/react';
-// import {store,persistor} from './src/services/store'
 import { observer, Provider } from "mobx-react"
 import { ItemStore } from './src/logic/itemsStore'
+import {SafeAreaView} from 'react-native'
 
 const itemStore = new ItemStore()
 
@@ -57,7 +55,9 @@ const App = () => {
                 }}
                 visible={isModalVisible}
             />
-            <Navigator ref={NavigationService.setTopLevelNavigator} />
+            <SafeAreaView style={{width: '100%', height: '100%'}}>
+               <Navigator ref={NavigationService.setTopLevelNavigator} /> 
+            </SafeAreaView>
             </Provider>
             {/*</PersistGate>*/}
         </>

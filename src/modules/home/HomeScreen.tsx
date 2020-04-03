@@ -17,6 +17,8 @@ import {useTranslation} from 'react-i18next';
 import { inject, observer } from 'mobx-react'
 import { SectionList, FlatList, Text, View } from 'react-native'
 import ListItem from '../../components/ListItem'
+import MainHeader from '../../components/MainHeader'
+import NavigationService from '../../services/NavigationServices';
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>
@@ -41,6 +43,11 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
     
     return (
         <>
+        <MainHeader
+        logout={() => NavigationService.navigate("LoginScreen")}
+        headline={t('products')} 
+        showCart={true}
+        itemsInCart={itemStore.cartItemNumber}/>
         <SectionList
           sections={[
             {
@@ -55,7 +62,6 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
           ]}
 
           renderItem={(item: any) => {
-              console.log(item.item)
               return(
                 <FlatList
                 data={item.item}
@@ -73,13 +79,14 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
 
           renderSectionHeader={({section}) => (
               <View style={{
-                  height: 152,
+                  height: 80,
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   backgroundColor: Colors.BUTTON_BLUE,
                   padding: 8}}>
                <Text style={{
-                fontSize: 42
+                fontSize: 42,
+                color: Colors.WHITE
               }}>{section.title}</Text>   
               </View>
             
@@ -120,22 +127,6 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
     );
 }));
 
-const HomeHeaderContainer = styled.View`
-    margin-top: 20px;
-    height: 50px;
-`;
 
-const SafeContainer = styled.SafeAreaView`
-    flex: 1;
-    background-color: ${Colors.WHITE};
-`;
-
-const ItemsContainer = styled.View`
-    flex-direction: row;
-    flex-flow: row wrap;
-    width: 100%;
-    align-items: center;
-    justify-content: space-around;
-`;
 
 export default HomeScreen;
