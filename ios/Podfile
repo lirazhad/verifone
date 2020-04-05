@@ -40,6 +40,7 @@ target 'verifone' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
   pod 'RNFS', :path => '../node_modules/react-native-fs'
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
   target 'verifoneTests' do
     inherit! :search_paths

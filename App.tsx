@@ -24,7 +24,10 @@ const App = () => {
 
     useEffect(() => {
         SplashScreen.hide();
+        itemStore.init()
     }, []);
+
+
 
     useEffect(() => {
         if (!isConnected) {

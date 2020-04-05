@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image} from 'react-native'
+import {StyleSheet, TouchableOpacity, View, Text, Image, Platform} from 'react-native'
 import { screenWidth } from '../constants/utils'
 import {images} from '../../assets/images'
 import { observer } from 'mobx-react'
+//import { imagesPathKeyValue } from '../data/dataManager'
 
 interface ListItemObject {
     id: number;
@@ -16,19 +17,26 @@ interface IProps {
     item: ListItemObject
     isSelected: boolean
     onSelect: (isSelected: boolean, item: ListItemObject) => void
+    imagesPathKeyValue:  Map<string, string>
 }
 
-const ListItem: React.FC<IProps> = observer(({item, onSelect}) => {
+const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue}) => {
     const [isSelected, setSelected] = useState(false);
+
     return (
        <View style={styles.container}>
                 <View style={styles.imageWrapper}>
                     <Image
                     resizeMode="contain"
                     style={styles.buttonImage}
-                    source={{
-                    uri: item.images[0],
-                    }}/>
+                    source={{ 
+                        uri : Platform.OS === 'android' ? 
+                        'file://' + imagesPathKeyValue.get(item.images[0]) :
+                         '' + imagesPathKeyValue.get(item.images[0]) }}
+                    // source={{
+                    // uri: item.images[0],
+                    // }}
+                    />
                 </View>
                 <View style={styles.nameWrapper}>
                    <Text style={styles.productName}>{item.name}</Text>    

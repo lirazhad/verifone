@@ -19,6 +19,7 @@ import { SectionList, FlatList, Text, View } from 'react-native'
 import ListItem from '../../components/ListItem'
 import MainHeader from '../../components/MainHeader'
 import NavigationService from '../../services/NavigationServices';
+import { storeImages } from '../../data/dataManager'
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>
@@ -37,10 +38,6 @@ interface Item {
 const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation, itemStore})=> {
     const {t} = useTranslation();
 
-    useEffect(() => {
-        itemStore.fetchData()
-    }, []);
-    
     return (
         <>
         <MainHeader
@@ -68,7 +65,8 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
                 numColumns={3}
                 renderItem={(item: any) =>{
                 return (
-                <ListItem 
+                <ListItem
+                imagesPathKeyValue={itemStore.imagesPathKeyValue} 
                 item={item.item} 
                 onSelect={itemStore.addToCart}/>)
                 }}

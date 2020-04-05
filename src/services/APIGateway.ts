@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Config from 'react-native-config';
 
 interface Item {
