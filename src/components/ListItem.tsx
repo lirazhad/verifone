@@ -17,14 +17,17 @@ interface IProps {
     item: ListItemObject
     isSelected: boolean
     onSelect: (isSelected: boolean, item: ListItemObject) => void
+    onItemPress: () => void
     imagesPathKeyValue:  Map<string, string>
 }
 
-const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue}) => {
+const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue, onItemPress}) => {
     const [isSelected, setSelected] = useState(false);
 
     return (
        <View style={styles.container}>
+            <TouchableOpacity  
+            onPress={onItemPress}>
                 <View style={styles.imageWrapper}>
                     <Image
                     resizeMode="contain"
@@ -38,6 +41,7 @@ const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue
                     // }}
                     />
                 </View>
+                </TouchableOpacity>
                 <View style={styles.nameWrapper}>
                    <Text style={styles.productName}>{item.name}</Text>    
                 </View>

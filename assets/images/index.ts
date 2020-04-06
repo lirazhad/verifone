@@ -12,5 +12,6 @@ export const images = {
     detailsIcon: require('./details-icon.png'),
     back:require('./back.png'),
     icon360:require('./360-icon.png'),
-    plusBig:require('./plus-big.png')
+    plusBig:require('./plus-big.png'),
+    pdfIcon:require('./pdf-icon.png'),
 };

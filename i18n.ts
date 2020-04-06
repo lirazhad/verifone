@@ -38,8 +38,9 @@ const resources = {
             image360:'תצוגת 360',
             addToTheQuoteCart:'הוסף לסל הצעות',
             widgets:'תכונות בולטות',
-            addedToTheCart:'נוסף לסל ההצעות'
-
+            addedToTheCart:'נוסף לסל ההצעות',
+            rent: 'השכרה',
+            sale: 'מכירה'
         }
     }
 };

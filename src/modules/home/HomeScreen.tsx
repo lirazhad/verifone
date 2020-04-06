@@ -18,8 +18,7 @@ import { inject, observer } from 'mobx-react'
 import { SectionList, FlatList, Text, View } from 'react-native'
 import ListItem from '../../components/ListItem'
 import MainHeader from '../../components/MainHeader'
-import NavigationService from '../../services/NavigationServices';
-import { storeImages } from '../../data/dataManager'
+import NavigationService from '../../services/NavigationServices'
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>
@@ -68,6 +67,7 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
                 <ListItem
                 imagesPathKeyValue={itemStore.imagesPathKeyValue} 
                 item={item.item} 
+                onItemPress={()=>{navigation.navigate('ItemScreen',{'item':item.item})}}
                 onSelect={itemStore.addToCart}/>)
                 }}
             />
