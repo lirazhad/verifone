@@ -71,6 +71,7 @@ export class ItemStore {
     }
 
 
+
     @action
     async fetchData() {
         let terminals = this.terminals

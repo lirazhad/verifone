@@ -7,34 +7,48 @@ import {useTranslation} from 'react-i18next';
 import { observer } from 'mobx-react'
 import MainHeader from '../../components/MainHeader'
 import NavigationService from '../../services/NavigationServices';
-import { screenHeight } from '../../constants/utils'
+import { screenHeight, screenWidth } from '../../constants/utils'
 import {images} from '../../../assets/images'
+import { getDeviceImagesPath } from '../../constants/utils'
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>;
 }
 
-
-const ItemScreen: React.FC<IProps> = observer(({}) => {
+const ItemScreen: React.FC<IProps> = observer(({navigation}) => {
     const [isSale, setSale] = useState(true);
 
     const {t} = useTranslation();
 
+    const { addToCart, item, itemStore } = navigation.state.params
+    let itemImages: any = getDeviceImagesPath(item.images)
+
     return (
         <>
         <MainHeader
-        logout={() => NavigationService.navigate("HomeScreen")}
-        headline={t('products')} 
+        backButton={()=>navigation.pop()}
         showCart={true}
-        itemsInCart={0}/>
+        itemsInCart={itemStore.cartItemNumber}/>
         <ScrollView style={styles.scrollView}>
             <View style={styles.mainImage}>
-
+                <ScrollView horizontal>  
+                {    
+                itemImages.map((item: any, i: number) => {   
+                    return  (<View style={{ height: '100%', padding: 20}}>
+                    <Image
+                    style={styles.pagerImage}
+                    resizeMode="contain"
+                    source={{uri: item}}
+                    />
+                    </View>)
+                })
+               }
+                </ScrollView>
             </View>
             <View style={styles.actionBar}>
                 
                 <View style={styles.addToCartButton}>
-                    <TouchableOpacity onPress={() => {}}>
+                    <TouchableOpacity onPress={() => {addToCart(false, item)}}>
                         <View style={styles.button}>
                             <Text style={styles.buttonText}>{t('addToTheQuoteCart')}</Text>
                             <Image
@@ -105,16 +119,19 @@ const ItemScreen: React.FC<IProps> = observer(({}) => {
                     </View>
                 </View>
             </View>
-            <Text style={styles.text}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. hjhjhj jhjhjh jhjhjh jhjhjh
-            hghghghh uyuyfgf tfghju yghghj
-            </Text>
+            <View style={styles.description}>
+                <Text style={styles.headline}>{'HEADLINE'}</Text>
+                <Text style={styles.text}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum. 
+                </Text>  
+            </View>
+             
         </ScrollView>
 
         </>
@@ -127,14 +144,20 @@ const ItemScreen: React.FC<IProps> = observer(({}) => {
         },
         mainImage:{
           height: screenHeight/3,
-          width: '100%',
-          backgroundColor: 'red'  
+          width: '100%'
         },
         scrollView: {
           flexDirection: 'column'
         },
+        headline: {
+            fontSize: 22,
+            fontWeight: '700'
+          },
+        description:{
+            padding: 24
+        }, 
         text: {
-          fontSize: 42,
+          fontSize: 14,
         },
         actionBar: {
             height: 96,
@@ -210,46 +233,12 @@ const ItemScreen: React.FC<IProps> = observer(({}) => {
             padding: 20,
             borderBottomLeftRadius: 6,
             borderTopLeftRadius: 6
+        },
+        pagerImage: {
+            width: screenWidth,
+            height: '100%'
         }
       });
       
-
-
-// const ItemScreen: React.FC<IProps> = ({navigation}) => {
-
-//     const dispatch: AppDispatch = useDispatch();
-//     const item = navigation.getParam('item');
-//     const {t} = useTranslation();
-//     const isAddedToCart = !!useSelector((state: RootState) => state.cart.cartItems[item.id]);
-
-//     return (
-//         <>
-//             <HomeHeaderContainer>
-//                 <Header variant={'ITEM'} backgroundColor={Colors.HEADER_COLOR} />
-//             </HomeHeaderContainer>
-//             <SafeContainer>
-//                 <ImagesBar imageUrl={item.images[0]} />
-//                 <ControllersContainer>
-//                     <AppText>{t('pdfText')}</AppText>
-
-//                     <Image360Container source={images.icon360} />
-//                     <AppText>{t('image360')}</AppText>
-//                     <Button
-//                         isAddedToCart={isAddedToCart}
-//                         width={200}
-//                         variant={'ITEM_SCREEN'}
-//                         backgroundColor={Colors.BUTTON_BLUE}
-//                         text={isAddedToCart ? t('addedToTheCart') : t('addToTheQuoteCart')}
-//                         onPress={() => {
-//                             dispatch(addToCart(item));
-//                         }}
-//                         disabled={isAddedToCart}
-//                     />
-//                 </ControllersContainer>
-//             </SafeContainer>
-//         </>
-//     );
-// };
-
 
 export default ItemScreen;

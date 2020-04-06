@@ -1,21 +1,11 @@
 import React, {useEffect} from 'react';
-import styled from 'styled-components/native';
-import {useDispatch, useSelector} from 'react-redux';
 import {Colors} from '../../styles';
 import {NavigationScreenProp} from 'react-navigation';
-import {fetchItems} from './redux/homeSlice';
-import {AppDispatch} from '../../services/store';
-import Header from '../../components/Header';
-import {RootState} from '../../services/rootReducer';
-import CardItem from '../../components/ItemCard';
-import {selectItemsGroupedByCategory} from './redux/homeSlice';
 import _ from 'lodash';
-import {logout} from '../auth/redux/userSessionSlice';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {useTranslation} from 'react-i18next';
 import { inject, observer } from 'mobx-react'
-import { SectionList, FlatList, Text, View } from 'react-native'
+import { SectionList, FlatList, Text, View, Platform } from 'react-native'
 import ListItem from '../../components/ListItem'
 import MainHeader from '../../components/MainHeader'
 import NavigationService from '../../services/NavigationServices'
@@ -65,9 +55,14 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
                 renderItem={(item: any) =>{
                 return (
                 <ListItem
-                imagesPathKeyValue={itemStore.imagesPathKeyValue} 
                 item={item.item} 
-                onItemPress={()=>{navigation.navigate('ItemScreen',{'item':item.item})}}
+                onItemPress={()=>{
+                    navigation.navigate('ItemScreen',
+                    {
+                    'item': item.item, 
+                    'addToCart': itemStore.addToCart,
+                    'itemStore': itemStore
+                })}}
                 onSelect={itemStore.addToCart}/>)
                 }}
             />

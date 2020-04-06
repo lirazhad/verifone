@@ -15,7 +15,7 @@ import { observer, Provider } from "mobx-react"
 import { ItemStore } from './src/logic/itemsStore'
 import {SafeAreaView} from 'react-native'
 
-const itemStore = new ItemStore()
+export const itemStore = new ItemStore()
 
 const App = () => {
     const isModalVisible = useSelector((state: RootState) => state.app.isModalVisible);

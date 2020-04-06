@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, View, Text, Image, Platform} from 'react-n
 import { screenWidth } from '../constants/utils'
 import {images} from '../../assets/images'
 import { observer } from 'mobx-react'
-//import { imagesPathKeyValue } from '../data/dataManager'
+import { getDeviceImagesPath } from '../constants/utils'
 
 interface ListItemObject {
     id: number;
@@ -18,11 +18,12 @@ interface IProps {
     isSelected: boolean
     onSelect: (isSelected: boolean, item: ListItemObject) => void
     onItemPress: () => void
-    imagesPathKeyValue:  Map<string, string>
 }
 
-const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue, onItemPress}) => {
+const ListItem: React.FC<IProps> = observer(({item, onSelect, onItemPress}) => {
     const [isSelected, setSelected] = useState(false);
+   
+    let itemImages: any = getDeviceImagesPath(item.images)
 
     return (
        <View style={styles.container}>
@@ -33,12 +34,7 @@ const ListItem: React.FC<IProps> = observer(({item, onSelect, imagesPathKeyValue
                     resizeMode="contain"
                     style={styles.buttonImage}
                     source={{ 
-                        uri : Platform.OS === 'android' ? 
-                        'file://' + imagesPathKeyValue.get(item.images[0]) :
-                         '' + imagesPathKeyValue.get(item.images[0]) }}
-                    // source={{
-                    // uri: item.images[0],
-                    // }}
+                        uri : itemImages[0]}}
                     />
                 </View>
                 </TouchableOpacity>

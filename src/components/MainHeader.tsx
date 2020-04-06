@@ -7,7 +7,7 @@ import { Colors } from '../styles'
 import {useTranslation} from 'react-i18next';
 
 interface IProps {
-    logout: () => void 
+    logout?: () => void 
     showCart?: boolean 
     itemsInCart?: number
     headline?: string
@@ -22,9 +22,9 @@ const MainHeader: React.FC<IProps> = observer(({headline, backButton, cart, item
     return (
        <View style={styles.container}>
           
-          <View style={{flex: 1, height: '100%', marginLeft: 14, alignItems: 'flex-start', justifyContent: 'center'}}>
-          <TouchableOpacity 
-             onPress={logout && logout} 
+           <View style={{flex: 1, height: '100%', marginLeft: 14, alignItems: 'flex-start', justifyContent: 'center'}}>
+           {logout &&<TouchableOpacity 
+             onPress={logout} 
                 style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -42,14 +42,28 @@ const MainHeader: React.FC<IProps> = observer(({headline, backButton, cart, item
                         />
                         <Text style={{color: Colors.SKY_BLUE, fontSize: 20}}>{t('logout')}</Text>
                   </View>  
-            </TouchableOpacity>
+            </TouchableOpacity>}
+
+            {backButton &&<TouchableOpacity 
+             onPress={backButton} 
+                style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                }}>
+                      <Image
+                        style={{height: 20}}
+                        resizeMode="contain"
+                        source={images.back}
+                        />
+            </TouchableOpacity>}
           </View>
+          
 
           <View style={{flex: 1, height: '100%', margin: 4, alignItems: 'center', justifyContent: 'center'}}>
                 {headline &&<Text style={{color: Colors.WHITE, fontSize: 22}}>{headline}</Text>}
           </View>
 
-        <View style={{flex: 1, height: '100%', margin: 4, alignItems: 'flex-end'}}>
+        <View style={{flex: 1, height: '100%', marginRight: 12, alignItems: 'flex-end'}}>
             {
              showCart &&   
             <TouchableOpacity style={{
