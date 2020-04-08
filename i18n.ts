@@ -40,7 +40,10 @@ const resources = {
             widgets:'תכונות בולטות',
             addedToTheCart:'נוסף לסל ההצעות',
             rent: 'השכרה',
-            sale: 'מכירה'
+            sale: 'מכירה',
+            productsForEstimation: 'סל מוצרים להצעת מחיר',
+            product: 'מוצר',
+            priceAndDicount: 'מחיר/הנחה'
         }
     }
 };

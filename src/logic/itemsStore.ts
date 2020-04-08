@@ -71,6 +71,11 @@ export class ItemStore {
     }
 
 
+    @action
+    clearCart = () => {
+        this.cart.clear()
+        this.cartItemNumber = 0
+    }
 
     @action
     async fetchData() {

@@ -33,7 +33,13 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
         logout={() => NavigationService.navigate("LoginScreen")}
         headline={t('products')} 
         showCart={true}
-        itemsInCart={itemStore.cartItemNumber}/>
+        itemsInCart={itemStore.cartItemNumber}
+        onCartPress={
+            () =>NavigationService.navigate("CartScreen", 
+                {
+                'cartItems': itemStore.cart, 
+                'clearCart': itemStore.clearCart
+                })}/>
         <SectionList
           sections={[
             {

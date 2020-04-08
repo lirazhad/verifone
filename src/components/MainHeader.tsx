@@ -12,11 +12,11 @@ interface IProps {
     itemsInCart?: number
     headline?: string
     backButton?: () => void
-    cart?: () => void
-    
+    onCartPress?: () => void
+
 }
 
-const MainHeader: React.FC<IProps> = observer(({headline, backButton, cart, itemsInCart, showCart, logout}) => {
+const MainHeader: React.FC<IProps> = observer(({headline, backButton, onCartPress, itemsInCart, showCart, logout}) => {
     const {t} = useTranslation();
 
     return (
@@ -66,7 +66,9 @@ const MainHeader: React.FC<IProps> = observer(({headline, backButton, cart, item
         <View style={{flex: 1, height: '100%', marginRight: 12, alignItems: 'flex-end'}}>
             {
              showCart &&   
-            <TouchableOpacity style={{
+            <TouchableOpacity 
+            onPress={onCartPress}
+            style={{
                 width: 80, 
                 height: '100%', 
                 alignItems: 'center',
@@ -107,7 +109,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        marginVertical: 3,
         paddingVertical: 8
     }
     ,
