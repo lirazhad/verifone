@@ -4,7 +4,8 @@ import {useTranslation} from 'react-i18next'
 import { observer } from 'mobx-react'
 import { getDeviceImagesPath } from '../constants/utils'
 import {images} from '../../assets/images'
-import { Colors } from '../styles';
+import { Colors } from '../styles'
+import { Dropdown } from 'react-native-material-dropdown'
 
 interface IProps {
     cartItem: any
@@ -70,7 +71,15 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
             <View style={styles.cardSectionRight}>
                 
                 <View style={styles.itemHeadline}>
-                    <Text style={styles.itemNameText}>{'drop down'}</Text>  
+                    <Dropdown
+                    containerStyle={{width: 120, justifyContent: 'center'}}
+                    label='rent'
+                    data={[{
+                        value: 'Banana',
+                      }, {
+                        value: 'Mango',
+                      }]}
+                    />
                     <Text style={styles.itemNameText}>{'name'}</Text>  
                 </View>
 
@@ -220,7 +229,8 @@ const styles = StyleSheet.create({
         margin: 12
     },
     discountText: {
-        color: Colors.GREEN_TEXT
+        color: Colors.GREEN_TEXT,
+        marginHorizontal: 8
     },
     fieldDiscountContainer: {
         height: 40,
