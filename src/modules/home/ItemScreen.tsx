@@ -48,7 +48,11 @@ const ItemScreen: React.FC<IProps> = observer(({navigation}) => {
             <View style={styles.actionBar}>
                 
                 <View style={styles.addToCartButton}>
-                    <TouchableOpacity onPress={() => {addToCart(false, item)}}>
+                    <TouchableOpacity onPress={() => {
+                        addToCart(
+                            false, 
+                            item, 
+                            isSale? t('sale'): t('rent'))}}>
                         <View style={styles.button}>
                             <Text style={styles.buttonText}>{t('addToTheQuoteCart')}</Text>
                             <Image

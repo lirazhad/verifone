@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import { View, FlatList, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { View, TextInput, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import {useTranslation} from 'react-i18next'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { getDeviceImagesPath } from '../constants/utils'
 import {images} from '../../assets/images'
 import { Colors } from '../styles'
@@ -9,28 +9,36 @@ import { Dropdown } from 'react-native-material-dropdown'
 
 interface IProps {
     cartItem: any
+    itemStore: any
 }
 
-const CartItem: React.FC<IProps> = observer(({cartItem}) => {
+const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, itemStore})=> {
 
     const {t} = useTranslation();
 
+    const [quantity, setQuantity] = useState(1);
+    const [discount, setDiscount] = useState('0');
+    const [price, setPrice] = useState(0);
+
+
     let itemImages: any = getDeviceImagesPath(cartItem.images)
 
-    console.warn(cartItem)
+    //console.warn(cartItem)
 
     const fieldItem = () => {
         return(
             <View style={styles.fieldItemMainContainer}>
                 <Text>{'headline'}</Text>
                 <View style={styles.fieldItemContainer}>
-                    <Text>{'ddkkk'}</Text>
+                    <Text>{'price'}</Text>
                 </View>
             </View>
         )
     }
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        //itemStore.setRentSale(cartItem.id)
+    }, []);
 
     return (
       <View style={styles.container}> 
@@ -38,7 +46,9 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
 
             <View style={styles.deleteContainer}>
                     <TouchableOpacity 
-                    onPress={()=>{}}
+                    onPress={()=>{
+                        itemStore.addToCart(true, cartItem)
+                    }}
                     style={{
                         width: 32, 
                         alignItems: 'center',
@@ -63,14 +73,29 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
                                     {fieldItem()}
                                     {fieldItem()}
                                     {fieldItem()}
-                                <View style={styles.discountView}>
-                                        <Text style={styles.discountText}>{'price'}</Text>
-                                    <View style={styles.fieldDiscountContainer}>
-                                        <Text style={styles.discountText}>{'-12%'}</Text>
-                                    </View>
-                                    <Text style={styles.discountText}>{'discount'}</Text>
-                                </View>
+                             
                             </View>
+
+                            <View style={styles.discountView}>
+                                        <Text style={styles.discountTextTotal}>{'₪'}</Text>
+                                        <Text style={styles.discountTextTotal}>{price}</Text>
+
+                                    <View style={styles.fieldDiscountContainer}>
+                                        <Text style={styles.discountText}>{'-'}</Text>
+                                        <TextInput 
+                                        onChangeText={(text)=>{
+                                            
+                                            setDiscount(text)
+                                        }}
+                                        maxLength={2}
+                                        keyboardType='numeric'
+                                        style={styles.discountText}>
+                                            {discount}
+                                        </TextInput>
+                                        <Text style={styles.discountText}>{'%'}</Text>
+                                    </View>
+                                    <Text style={styles.discountText}>{t('discount')}</Text>
+                                </View>
 
                         <View style={styles.discountView}>
                             <View style={styles.calcView}>
@@ -100,25 +125,40 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
                     <View style={styles.cardSectionRight}>
                         <View style={styles.itemHeadline}>
                             <Dropdown
-                            containerStyle={{width: 120, justifyContent: 'center'}}
+                            onChangeText={(value: string)=>{
+                                itemStore.setRentSale(cartItem.id, value)
+                            }}
+                            value={t(cartItem.rentOrSale)}
+                            containerStyle={{
+                                width: 80, 
+                                justifyContent: 'flex-start',
+                            paddingBottom: 18}}
                             data={[{
                                 value: t('rent'),
                                 }, {
                                 value: t('sale'),
                                 }]}
                             />
-                            <Text style={styles.itemNameText}>{'name'}</Text>  
+                            <Text style={styles.itemNameText}>{cartItem.name}</Text>  
                         </View>
 
                         <View style={styles.itemCount}>
-                            <TouchableOpacity>
+                            <TouchableOpacity 
+                            onPress={()=>{
+                                if(quantity > 1){
+                                    setQuantity(quantity - 1)
+                                }
+                            }}>
                                 <Image
                                     style={styles.iconImage}
                                     resizeMode="contain"
                                     source={images.minus}/>    
                             </TouchableOpacity>
-                            <Text style={styles.counterText}>{0}</Text>
-                            <TouchableOpacity>
+                            <Text style={styles.counterText}>{quantity}</Text>
+                            <TouchableOpacity
+                            onPress={()=>{
+                                setQuantity(quantity + 1)
+                            }}>
                                 <Image
                                     style={styles.iconImage}
                                     resizeMode="contain"
@@ -128,7 +168,7 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
                         </View>
 
                         <View style={styles.description}>
-                            <Text>{'description df dfdfdf df dfdf dfdfd dfdfd dfdf fdd fdfdf dffd'}</Text>
+                            <Text>{'item description'}</Text>
                         </View>
                     </View>
                     
@@ -152,7 +192,7 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
         <View style={styles.bottomLine}/>
     </View> 
     );
-});
+}));
 
 
 const styles = StyleSheet.create({
@@ -203,7 +243,8 @@ const styles = StyleSheet.create({
     },
     itemNameText: {
         marginLeft: 12,
-        fontSize: 20,
+        fontSize: 18,
+        width: '50%',
         fontWeight: '700'
     },
     itemCount: {
@@ -267,7 +308,12 @@ const styles = StyleSheet.create({
     },
     discountText: {
         color: Colors.GREEN_TEXT,
-        marginHorizontal: 8
+        margin: 1
+    },
+    discountTextTotal: {
+        color: Colors.GREEN_TEXT,
+        margin: 1,
+        fontWeight: '700'
     },
     calcView: {
         flexDirection: 'row',
@@ -277,6 +323,7 @@ const styles = StyleSheet.create({
         fontWeight: '700'
     },
     fieldDiscountContainer: {
+        flexDirection: 'row',
         height: 40,
         alignItems: 'center',
         justifyContent: 'center',

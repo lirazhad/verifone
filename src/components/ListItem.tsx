@@ -4,6 +4,7 @@ import { screenWidth } from '../constants/utils'
 import {images} from '../../assets/images'
 import { observer } from 'mobx-react'
 import { getDeviceImagesPath } from '../constants/utils'
+import {useTranslation} from 'react-i18next';
 
 interface ListItemObject {
     id: number;
@@ -16,11 +17,12 @@ interface ListItemObject {
 interface IProps {
     item: ListItemObject
     isSelected: boolean
-    onSelect: (isSelected: boolean, item: ListItemObject) => void
+    onSelect: (isSelected: boolean, item: ListItemObject, rentOrSale: string) => void
     onItemPress: () => void
 }
 
 const ListItem: React.FC<IProps> = observer(({item, onSelect, onItemPress}) => {
+    const {t} = useTranslation();
     const [isSelected, setSelected] = useState(false);
    
     let itemImages: any = getDeviceImagesPath(item.images)
@@ -44,7 +46,7 @@ const ListItem: React.FC<IProps> = observer(({item, onSelect, onItemPress}) => {
                 <TouchableOpacity 
                 onPress={()=>{
                     setSelected(!isSelected)
-                    onSelect(isSelected, item)
+                    onSelect(isSelected, item, t('sale'))
                     }}>
                     <View style={styles.buttonWrapper}>
                         <Image 

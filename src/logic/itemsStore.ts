@@ -1,6 +1,8 @@
 import { observable, action } from 'mobx'
 import { getItems } from '../api/data'
 import { getDataFromDevice, storeDataToDevice, downloadImages } from '../data/dataManager'
+import {useTranslation} from 'react-i18next'
+
 
 export class ItemStore {
 
@@ -56,18 +58,33 @@ export class ItemStore {
     }
 
     @action
-    addToCart = (addOrRemove: boolean, itemToAdd: any) => {
+    addToCart = (
+        addOrRemove: boolean, 
+        itemToAdd: any, 
+        rentOrSale?: string) => {
         if(addOrRemove){
-            this.cart = this.cart.filter(function( obj: any ) {
+
+            const newCart = this.cart.filter(function( obj: any ) {
                 return obj.id !== itemToAdd.id;
               });
 
+              this.cart.replace(newCart)
               this.cartItemNumber--
               
         }else{
+            itemToAdd['rentOrSale'] = rentOrSale
             this.cart.push(itemToAdd)
             this.cartItemNumber++
         }
+    }
+
+    @action
+    setRentSale = (id: string, rentOrSale: string) => {
+        this.cart.forEach((element: any) => {
+            if(element.id === id){
+                element['rentOrSale'] = rentOrSale
+            }
+        });
     }
 
 
@@ -98,8 +115,6 @@ export class ItemStore {
                     downloadImages(data[key].images, imagesPathKeyValue)
                 }
             });
-
-
             this.activityIndecator = false
         }else{
             setTimeout(() => {

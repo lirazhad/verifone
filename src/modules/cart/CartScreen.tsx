@@ -11,6 +11,7 @@ import {useTranslation} from 'react-i18next'
 import CartHeader from '../../components/CartHeader'
 import { observer } from 'mobx-react'
 import CartItem from '../../components/CartItem'
+import CostumerDetails from '../../components/CostumerDetails'
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>
@@ -34,18 +35,18 @@ const CartScreen: React.FC<IProps> = observer(({navigation}) => {
         clearCart={clearCart}/>
         <View style={styles.header}>
             <View style={styles.leftHeadline}>
-                <Text style={styles.headerText}>{t('priceAndDicount')}</Text>
+                <Text style={styles.headerText}>{t('priceAndDiscount')}</Text>
             </View>
             <View style={styles.rightHeadline}>
                  <Text style={styles.headerText}>{t('product')}</Text>
             </View>
-           
-            
         </View>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}>                
             <FlatList
               data={cartItems}
-              renderItem={(item: any) => <CartItem cartItem={item.item}/>} />   
+              renderItem={(item: any) => <CartItem cartItem={item.item}/>} 
+              ListFooterComponent={<CostumerDetails />}
+              />    
         </ScrollView>
         </View>
     );
@@ -91,6 +92,11 @@ const styles = StyleSheet.create({
     scrollView: {
         width: '100%',
         height: '100%'        
+    },
+    costumerDetails: {
+        width: '100%',
+        height: 1500,
+        backgroundColor: 'red' 
     }
 })
 

@@ -23,7 +23,7 @@ const resources = {
             cartProductsAmount:'מוצרים בסל הצעות',
             clearCart:'נקה סל',
             customerDetails:'פרטי לקוח',
-            fistName:'שם פרטי',
+            firstName:'שם פרטי',
             lastName:'שם משפחה',
             companyName: 'שם החברה',
             sendQuoteTo:'שלח הצעה ל',
@@ -43,7 +43,8 @@ const resources = {
             sale: 'מכירה',
             productsForEstimation: 'סל מוצרים להצעת מחיר',
             product: 'מוצר',
-            priceAndDicount: 'מחיר/הנחה'
+            priceAndDiscount: 'מחיר/הנחה',
+            discount: 'הנחה'
         }
     }
 };

@@ -127,9 +127,9 @@ const QuoteForm: React.FC<IProps> = ({}) => {
                                 />
                                 <Input
                                     color={Colors.BLACK}
-                                    label={t('fistName')}
+                                    label={t('firstName')}
                                     onChangeText={handleChange('firstName')}
-                                    placeholder={t('insert') + t('fistName')}
+                                    placeholder={t('insert') + t('firstName')}
                                     width={'47%'}
                                     margin={'5px'}
                                     error={!!(errors.firstName && touched.firstName)}

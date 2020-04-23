@@ -13,4 +13,5 @@ export const TEXT_FIELD_BACKGROUND = '#f9f9f9'
 export const TEXT_FIELD_BORDER = '#d3d3d3'
 export const GREEN_TEXT = '#22a197'
 export const ICE_BLUE ='#e8f3f6'
+export const PALE_BLUE = '#e2e8ea'
 
