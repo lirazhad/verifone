@@ -35,9 +35,8 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
     return (
       <View style={styles.container}> 
         <View style={styles.mainContainer}>
-            
-            <View style={styles.cardSectionLeft}>
-                <View style={styles.fields}>
+
+            <View style={styles.deleteContainer}>
                     <TouchableOpacity 
                     onPress={()=>{}}
                     style={{
@@ -53,71 +52,103 @@ const CartItem: React.FC<IProps> = observer(({cartItem}) => {
                                 />
                         </View>  
                     </TouchableOpacity>
-                        {fieldItem()}
-                        {fieldItem()}
-                        {fieldItem()}
-                        {fieldItem()}
-                        {fieldItem()}
-                    <View style={styles.discountView}>
-                         <Text style={styles.discountText}>{'price'}</Text>
-                        <View style={styles.fieldDiscountContainer}>
-                            <Text style={styles.discountText}>{'-12%'}</Text>
+            </View>
+               <View style={styles.dataContainer}>
+                   <View style={{flexDirection: 'row', width: '100%'}}>
+                        <View style={styles.cardSectionLeft}>
+                            <View style={styles.fields}>
+                                
+                                    {fieldItem()}
+                                    {fieldItem()}
+                                    {fieldItem()}
+                                    {fieldItem()}
+                                    {fieldItem()}
+                                <View style={styles.discountView}>
+                                        <Text style={styles.discountText}>{'price'}</Text>
+                                    <View style={styles.fieldDiscountContainer}>
+                                        <Text style={styles.discountText}>{'-12%'}</Text>
+                                    </View>
+                                    <Text style={styles.discountText}>{'discount'}</Text>
+                                </View>
+                            </View>
+
+                        <View style={styles.discountView}>
+                            <View style={styles.calcView}>
+                                <Text>{'₪'}</Text>
+                                <Text >{'555'}</Text>
+                            </View>  
+                                <Text>{'x'}</Text>
+                                <Text>{'1'}</Text>
                         </View>
-                        <Text style={styles.discountText}>{'discount'}</Text>
+
+                        <View style={styles.discountView}>
+                            <View style={styles.calcView}>
+                                 <Text style={styles.totalPriceText}>{'₪'}</Text>
+                                <Text style={styles.totalPriceText}>{'555'}</Text>
+                            </View>       
+                        </View>
+
+                        <View style={styles.discountView}>
+                            <Text>{'service and lisence'}</Text>
+                        </View>
+
+                        <View style={styles.discountView}>
+                            <Text>{'service and lisence'}</Text>
+                        </View>
                     </View>
-                </View>
-            </View>
 
-            <View style={styles.cardSectionRight}>
-                
-                <View style={styles.itemHeadline}>
-                    <Dropdown
-                    containerStyle={{width: 120, justifyContent: 'center'}}
-                    label='rent'
-                    data={[{
-                        value: 'Banana',
-                      }, {
-                        value: 'Mango',
-                      }]}
-                    />
-                    <Text style={styles.itemNameText}>{'name'}</Text>  
-                </View>
+                    <View style={styles.cardSectionRight}>
+                        <View style={styles.itemHeadline}>
+                            <Dropdown
+                            containerStyle={{width: 120, justifyContent: 'center'}}
+                            data={[{
+                                value: t('rent'),
+                                }, {
+                                value: t('sale'),
+                                }]}
+                            />
+                            <Text style={styles.itemNameText}>{'name'}</Text>  
+                        </View>
 
-                <View style={styles.itemCount}>
-                    <TouchableOpacity>
-                        <Image
-                            style={styles.iconImage}
-                            resizeMode="contain"
-                            source={images.minus}/>    
-                    </TouchableOpacity>
-                    <Text style={styles.counterText}>{0}</Text>
-                    <TouchableOpacity>
-                        <Image
-                            style={styles.iconImage}
-                            resizeMode="contain"
-                            source={images.plus}/>    
-                    </TouchableOpacity>
-                     
-                </View>
+                        <View style={styles.itemCount}>
+                            <TouchableOpacity>
+                                <Image
+                                    style={styles.iconImage}
+                                    resizeMode="contain"
+                                    source={images.minus}/>    
+                            </TouchableOpacity>
+                            <Text style={styles.counterText}>{0}</Text>
+                            <TouchableOpacity>
+                                <Image
+                                    style={styles.iconImage}
+                                    resizeMode="contain"
+                                    source={images.plus}/>    
+                            </TouchableOpacity>
+                                
+                        </View>
 
-                <View style={styles.description}>
-                    <Text>{'description df dfdfdf df dfdf dfdfd dfdfd dfdf fdd fdfdf dffd'}</Text>
-                </View>
-            </View>
-
-            <View style={styles.imageSection}>
-                    <Image
-                    style={styles.image}
-                    resizeMode="contain"
-                    source={{uri: itemImages[0]}}
-                    />                 
-            </View>
+                        <View style={styles.description}>
+                            <Text>{'description df dfdfdf df dfdf dfdfd dfdfd dfdf fdd fdfdf dffd'}</Text>
+                        </View>
+                    </View>
+                    
+                   </View>
+                    
+                    <View style={styles.comments}>
+                            <Text>{'product comment'}</Text>
+                    </View>
+                </View>              
+        <View style={styles.imageSection}>
+                <Image
+                style={styles.image}
+                resizeMode="contain"
+                source={{uri: itemImages[0]}}
+                />                 
+        </View>
             
         </View>
 
-        <View style={styles.comments}>
-            <Text>{'product comment'}</Text>
-        </View>
+
         <View style={styles.bottomLine}/>
     </View> 
     );
@@ -131,7 +162,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         width: '100%' , 
         marginVertical: 1,
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     cardSectionLeft: {
         flex: 2,
@@ -146,6 +177,7 @@ const styles = StyleSheet.create({
     },
     imageSection: {
         flex: 1,
+        paddingRight: 20,
         flexDirection: 'column',
     },
     imageWrapper: {
@@ -197,7 +229,12 @@ const styles = StyleSheet.create({
     },
     comments: {
         width: '100%',
-        margin: 12,
+        padding: 12,
+        marginVertical: 12,
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: Colors.SKY_BLUE,
+        backgroundColor: Colors.ICE_BLUE
     },
     fieldItemContainer: {
         height: 56,
@@ -212,12 +249,12 @@ const styles = StyleSheet.create({
     },
     fieldItemMainContainer: {
         alignItems: 'center',
-        margin: 6
+        marginVertical: 6
     },
     fields: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     bottomLine: {
         height: 1,
@@ -226,11 +263,18 @@ const styles = StyleSheet.create({
     discountView: {
         flexDirection: 'row',
         alignItems: 'center',
-        margin: 12
+        margin: 4
     },
     discountText: {
         color: Colors.GREEN_TEXT,
         marginHorizontal: 8
+    },
+    calcView: {
+        flexDirection: 'row',
+    },
+    totalPriceText: {
+        fontSize: 18,
+        fontWeight: '700'
     },
     fieldDiscountContainer: {
         height: 40,
@@ -242,6 +286,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.TEXT_FIELD_BORDER,
         backgroundColor: Colors.TEXT_FIELD_BACKGROUND
+    },
+    deleteContainer:{
+        width: 40, 
+        height: 96, 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
+    dataContainer: {
+        flexDirection: 'column', 
+        flex: 4
     }
 })
 
