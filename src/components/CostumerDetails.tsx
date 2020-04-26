@@ -6,6 +6,7 @@ import { getDeviceImagesPath } from '../constants/utils'
 import {images} from '../../assets/images'
 import { Colors } from '../styles'
 import CostumerInputForm from './CostumerInputForm'
+import RadioButtons from '../components/RadioButton'
 
 interface IProps {
 
@@ -42,12 +43,17 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
             onChangeText={()=>{}}
            />
         </View>
+       
         <View>
            <CostumerInputForm 
             headline={t('companyName')}
             placeHolder={'jhh'}
             onChangeText={()=>{}}
            /> 
+        </View>
+
+        <View style={styles.section}>
+            <RadioButtons onChange={(selected)=>{ console.warn(selected)}} />
         </View>
         
       </View> 
@@ -64,7 +70,9 @@ const styles = StyleSheet.create({
     section: {
         width: '100%' , 
         flexDirection: 'row',
-        paddingRight: 18
+        paddingRight: 18,
+        alignItems: 'center',
+        justifyContent: 'flex-end'
     },
     validationView: {
         flex: 1,

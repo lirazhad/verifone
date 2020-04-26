@@ -1,5 +1,6 @@
 import React from "react";
 import {Colors} from '../styles';
+import { View, StyleSheet, Text } from 'react-native'
 import styled from 'styled-components/native';
 // @ts-ignore
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
@@ -22,7 +23,7 @@ const RadioButtons: React.FC<IProps> = ({onChange}) => {
         {label: 'מייל', value: SendTo.EMAIL}
     ];
     return (
-        <RadioButtonsContainer>
+        <View style={styles.container}>
             <RadioForm
                 radio_props={radio_props}
                 initial={'SMS'}
@@ -31,29 +32,29 @@ const RadioButtons: React.FC<IProps> = ({onChange}) => {
                 buttonInnerColor={Colors.BUTTON_BLUE}
                 animation={true}
                 onPress={onChange}
+                buttonSize={40}
+                labelStyle={{fontSize: 20, margin: 12}}
             />
-            <TextContainer>{t('sendQuoteTo')}</TextContainer>
+            <Text style={styles.text}>{t('sendQuoteTo')}</Text>
 
-        </RadioButtonsContainer>
+        </View>
 
     )
 }
 
-
-const RadioButtonsContainer = styled.View`
-     width:100%;
-     margin-top:15px;
-     flex-direction:row;
-     text-align: center;
-     height: 45px;
-     align-items:center;
-     justify-content:flex-end;
-`
-const TextContainer = styled.Text`
-   align-items:flex-end;
-   margin-left:20px;
-`
-
+const styles = StyleSheet.create({
+    container: {
+        height: 80, 
+        flexDirection: 'row',
+        alignItems: 'center',
+        // justifyContent: 'flex-end',
+    },
+    text: {
+        fontSize: 20,
+        marginBottom: 10,
+        marginLeft: 40
+    }
+})
 
 export default RadioButtons
 
