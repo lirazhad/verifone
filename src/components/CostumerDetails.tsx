@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, TextInput, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {useTranslation} from 'react-i18next'
 import { inject, observer } from 'mobx-react'
 import { getDeviceImagesPath } from '../constants/utils'
@@ -44,7 +44,7 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
            />
         </View>
        
-        <View>
+        <View style={{marginLeft: 18}}>
            <CostumerInputForm 
             headline={t('companyName')}
             placeHolder={'jhh'}
@@ -56,6 +56,19 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
             <RadioButtons onChange={(selected)=>{ console.warn(selected)}} />
         </View>
         
+        <View style={styles.section}>
+            <Text style={styles.text}>{t('comment')}</Text>
+        </View>
+
+        <View style={styles.section}>
+            <TextInput  multiline={true} style={styles.input}/>
+        </View>
+
+        <TouchableOpacity style={styles.section}>
+           <View style={styles.submitButton}>
+                <Text style={styles.buttonText}>{t('submitQuote')}</Text>
+           </View>
+        </TouchableOpacity>
       </View> 
     );
 }));
@@ -65,12 +78,13 @@ const styles = StyleSheet.create({
     container: {
         width: '100%' , 
         flexDirection: 'column',
-        backgroundColor: Colors.PALE_BLUE
+        backgroundColor: Colors.PALE_BLUE,
+        padding: 12
     },
     section: {
         width: '100%' , 
         flexDirection: 'row',
-        paddingRight: 18,
+        paddingHorizontal: 18,
         alignItems: 'center',
         justifyContent: 'flex-end'
     },
@@ -88,6 +102,31 @@ const styles = StyleSheet.create({
     name: {
         flex: 1,
         backgroundColor: 'red'
+    },
+    text: {
+        fontSize: 20,
+        marginVertical: 12
+    },
+    input: {
+        width: '100%',
+        backgroundColor: Colors.WHITE,
+        height: 170,
+        marginVertical: 12,
+        borderRadius: 12,
+        padding: 12
+    },
+    submitButton: {
+        height: 72,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.BUTTON_BLUE,
+        marginVertical: 18,
+        borderRadius: 6,
+    },
+    buttonText: {
+        color: Colors.WHITE,
+        fontSize: 20
     }
 })
 

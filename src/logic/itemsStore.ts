@@ -19,19 +19,19 @@ export class ItemStore {
 
 
    async init(){
-    //    await this.fetchData()
-    //    setTimeout(() => {
-    //      storeDataToDevice('terminals', JSON.stringify(this.terminals))
-    //      storeDataToDevice('cashRegister', JSON.stringify(this.cashRegister))
+       await this.fetchData()
+       setTimeout(async () => {
+         storeDataToDevice('terminals', JSON.stringify(this.terminals))
+         storeDataToDevice('cashRegister', JSON.stringify(this.cashRegister))
 
-    //      let imagesPathKeyValueObj = {}
-    //      this.imagesPathKeyValue.forEach((value, key)=>{
-    //          imagesPathKeyValueObj[key] = value
-    //      })
-    //      storeDataToDevice('imagesPathKeyValue', JSON.stringify(imagesPathKeyValueObj))
+         let imagesPathKeyValueObj = {}
+         this.imagesPathKeyValue.forEach((value, key)=>{
+             imagesPathKeyValueObj[key] = value
+         })
+         await storeDataToDevice('imagesPathKeyValue', JSON.stringify(imagesPathKeyValueObj))
+    }, 1500);
+         await this.loadDataFromStorage()
 
-    // }, 1500);
-    this.loadDataFromStorage()
     }
 
 

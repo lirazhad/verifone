@@ -14,6 +14,7 @@ import ToastService from './src/services/ToastService';
 import { observer, Provider } from "mobx-react"
 import { ItemStore } from './src/logic/itemsStore'
 import {SafeAreaView} from 'react-native'
+import { getDataFromDevice } from './src/data/dataManager'
 
 export const itemStore = new ItemStore()
 
@@ -24,7 +25,16 @@ const App = () => {
 
     useEffect(() => {
         SplashScreen.hide();
-        itemStore.init()
+        getDataFromDevice('jwtToken').then(
+            (token)=>{
+                if(token !== undefined){
+                    itemStore.loadDataFromStorage()
+                    NavigationService.navigate('HomeScreen');
+                }
+            }
+        )
+        
+        //itemStore.init()
     }, []);
 
 
@@ -39,7 +49,6 @@ const App = () => {
 
     return (
         <>
-            {/*<PersistGate loading={null} persistor={persistor}>*/}
             <Provider itemStore={itemStore}>
             <Toast
                 ref="toast"
@@ -62,7 +71,6 @@ const App = () => {
                <Navigator ref={NavigationService.setTopLevelNavigator} /> 
             </SafeAreaView>
             </Provider>
-            {/*</PersistGate>*/}
         </>
     );
 };

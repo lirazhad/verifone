@@ -14,6 +14,7 @@ import {login} from './redux/userSessionSlice';
 import {AppDispatch} from '../../services/store';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {RootState} from '../../services/rootReducer';
+import { itemStore } from '../../../App'
 
 interface LoginForm {
     email: string;
@@ -46,7 +47,10 @@ const LoginScreen: React.FC = () => {
                         <Formik
                             initialValues={initialValues}
                             validationSchema={LoginSchema}
-                            onSubmit={({email, password}) => dispatch(login({email, password}))}>
+                            onSubmit={({email, password}) => {
+                                itemStore.init()
+                                dispatch(login({email, password}))
+                                }}>
                             {({
                                 values,
                                 handleChange,

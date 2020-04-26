@@ -32,11 +32,10 @@ const RadioButtons: React.FC<IProps> = ({onChange}) => {
                 buttonInnerColor={Colors.BUTTON_BLUE}
                 animation={true}
                 onPress={onChange}
-                buttonSize={40}
-                labelStyle={{fontSize: 20, margin: 12}}
+                buttonSize={24}
+                labelStyle={{fontSize: 20, marginHorizontal: 18}}
             />
             <Text style={styles.text}>{t('sendQuoteTo')}</Text>
-
         </View>
 
     )
