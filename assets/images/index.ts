@@ -16,4 +16,5 @@ export const images = {
     pdfIcon: require('./pdf-icon.png'),
     minus: require('./minus.png'),
     plus: require('./plus-1.png'),
+    edit: require('./edit.png'),
 };

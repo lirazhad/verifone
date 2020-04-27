@@ -67,11 +67,13 @@ const styles = StyleSheet.create({
         flex: 10,
         height: 56,
         borderRadius: 8,
+        padding: 12,
         backgroundColor: Colors.WHITE
     },
     star: {
         marginTop: 28,
-        fontSize: 33
+        fontSize: 33,
+        color: Colors.BUTTON_BLUE
     },
     starContainer: {
         flex: 1,

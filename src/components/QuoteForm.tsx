@@ -79,7 +79,7 @@ const QuoteForm: React.FC<IProps> = ({}) => {
             <FormContainer>
                 <QuoteHeader>
                     <ImageContainer source={images.detailsIcon} />
-                    <TextContainer>{t('customerDetails')}</TextContainer>
+                    <TextContainer>{t('costumerDetails')}</TextContainer>
                 </QuoteHeader>
                 <DetailsContainer>
                     <Formik

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {useTranslation} from 'react-i18next'
 import { inject, observer } from 'mobx-react'
 import { getDeviceImagesPath } from '../constants/utils'
@@ -16,18 +16,32 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
 
     const {t} = useTranslation();
 
+    const [validationDate, setValidationDate] = useState('');
+
 
     useEffect(() => {
+        const today = new Date();
+        const date = today.getDate() + "/"+ parseInt(today.getMonth()+1) +"/"+ today.getFullYear();
+        setValidationDate(date)
     }, []);
 
     return (
       <View style={styles.container}> 
         <View style={styles.section}>
             <TouchableOpacity style={styles.validationView}>
-                <Text>{'date'}</Text>
+                <View style={styles.validationViewWrapper}>
+                  <Image 
+                  resizeMode="contain"
+                  style={styles.icon}
+                  source={images.edit}
+                  />
+                  <Text style={styles.validationViewText}>{validationDate}</Text>
+                  <Text style={styles.validationViewText}>{t('validation') + ' :'}</Text>  
+                </View>
+                
             </TouchableOpacity>
             <View style={styles.headline}>
-                <Text>{'costumer details'}</Text>
+                <Text style={styles.headlineText}>{t('costumerDetails')}</Text>
             </View>
         </View>
 
@@ -86,18 +100,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 18,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        margin: 12
     },
     validationView: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 64
+        height: 40,
+        flexDirection: 'row'
+    },
+    validationViewWrapper: {
+        backgroundColor: Colors.BLACK,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    validationViewText: {
+        color: Colors.WHITE,
+        padding: 8,
     },
     headline: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    headlineText: {
+        fontSize: 22
     },
     name: {
         flex: 1,
@@ -127,6 +157,11 @@ const styles = StyleSheet.create({
     buttonText: {
         color: Colors.WHITE,
         fontSize: 20
+    },
+    icon: {
+        width: 24,
+        height: 24,
+        marginHorizontal: 12
     }
 })
 

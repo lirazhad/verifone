@@ -22,7 +22,7 @@ const resources = {
             cashiers:'קופות',
             cartProductsAmount:'מוצרים בסל הצעות',
             clearCart:'נקה סל',
-            customerDetails:'פרטי לקוח',
+            costumerDetails:'פרטי לקוח',
             firstName:'שם פרטי',
             lastName:'שם משפחה',
             companyName: 'שם החברה',
@@ -44,7 +44,8 @@ const resources = {
             productsForEstimation: 'סל מוצרים להצעת מחיר',
             product: 'מוצר',
             priceAndDiscount: 'מחיר/הנחה',
-            discount: 'הנחה'
+            discount: 'הנחה',
+            validation: 'תקף עד'
         }
     }
 };
