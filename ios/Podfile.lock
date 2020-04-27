@@ -227,6 +227,8 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.9.0):
     - React
+  - RNDateTimePicker (2.3.2):
+    - React
   - RNExitApp (1.1.0):
     - React
   - RNFS (2.16.6):
@@ -272,6 +274,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNExitApp (from `../node_modules/react-native-exit-app`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -342,6 +345,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNExitApp:
     :path: "../node_modules/react-native-exit-app"
   RNFS:
@@ -386,6 +391,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: 453cd7c335ec9ba3b877e27d02238956b76f3268
+  RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
   RNExitApp: c4e052df2568b43bec8a37c7cd61194d4cfee2c3
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38

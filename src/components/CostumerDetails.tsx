@@ -7,6 +7,8 @@ import {images} from '../../assets/images'
 import { Colors } from '../styles'
 import CostumerInputForm from './CostumerInputForm'
 import RadioButtons from '../components/RadioButton'
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 interface IProps {
 
@@ -18,6 +20,24 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
 
     const [validationDate, setValidationDate] = useState('');
 
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+      };
+
+    const showMode = currentMode => {
+        setShow(true);
+        setMode(currentMode);
+      };
+    
+      const showDatepicker = () => {
+        showMode('date');
+      };
 
     useEffect(() => {
         const today = new Date();
@@ -26,9 +46,12 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
     }, []);
 
     return (
+     <>   
       <View style={styles.container}> 
         <View style={styles.section}>
-            <TouchableOpacity style={styles.validationView}>
+            <TouchableOpacity 
+            onPress={showDatepicker}
+            style={styles.validationView}>
                 <View style={styles.validationViewWrapper}>
                   <Image 
                   resizeMode="contain"
@@ -84,6 +107,27 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
            </View>
         </TouchableOpacity>
       </View> 
+
+      {show && (
+             <View style={styles.datePicker}>
+                <DateTimePicker
+                testID="dateTimePicker"
+                timeZoneOffsetInMinutes={0}
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+                />
+                <TouchableOpacity 
+                onPress={()=>setShow(false)}
+                style={styles.buttonPicker}>
+                    <Text>{'set'}</Text>
+                </TouchableOpacity>
+              </View>
+      )}
+      </>
+
     );
 }));
 
@@ -162,6 +206,18 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         marginHorizontal: 12
+    },
+    datePicker: {
+        width: '100%', 
+        height: '100%', 
+        backgroundColor: 
+        Colors.ICE_BLUE, 
+        position: 'absolute',
+        justifyContent: 'center'
+    },
+    buttonPicker: {
+        margin: 8,
+        alignItems: 'center'
     }
 })
 
