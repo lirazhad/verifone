@@ -45,7 +45,13 @@ const resources = {
             product: 'מוצר',
             priceAndDiscount: 'מחיר/הנחה',
             discount: 'הנחה',
-            validation: 'תקף עד'
+            validation: 'תקף עד',
+            enterFirstName: 'הכניסו שם פרטי',
+            enterLastName: 'הכניסו שם משפחה',
+            enterComponyName: 'הכניסו שם חברה',
+            enterPhone: 'הכניסו טלפון',
+            enterEmail: 'הכניסו מייל',
+            relatedProducts: 'מוצרים נלווים'
         }
     }
 };

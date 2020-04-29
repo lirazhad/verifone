@@ -49,8 +49,11 @@ const HomeScreen: React.FC<IProps> =  inject("itemStore")(observer(({navigation,
             {
               title: t('cashiers'),
               data: [itemStore.cashRegister.toJS()],
-            }
-           
+            },
+            {
+              title: t('relatedProducts'),
+              data: [itemStore.relatedProducts.toJS()],
+              }
           ]}
 
           renderItem={(item: any) => {

@@ -12,7 +12,7 @@ interface IProps {
     onChangeText: () => void
 }
 
-const CostumerInputForm: React.FC<IProps> = inject("itemStore")(observer(({headline})=> {
+const CostumerInputForm: React.FC<IProps> = inject("itemStore")(observer(({headline, placeHolder})=> {
 
     const {t} = useTranslation();
 
@@ -27,7 +27,7 @@ const CostumerInputForm: React.FC<IProps> = inject("itemStore")(observer(({headl
                 <Text style={styles.headlineText}>{headline}</Text>
             </View>
             <View style={styles.inputTextContainer}>
-                <TextInput style={styles.inputText}/>
+                <TextInput placeholder={placeHolder} style={styles.inputText}/>
             </View>
         </View> 
         <View style={styles.starContainer}>
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         height: 56,
         borderRadius: 8,
         padding: 12,
-        backgroundColor: Colors.WHITE
+        backgroundColor: Colors.WHITE,
+        textAlign: 'right'
     },
     star: {
         marginTop: 28,

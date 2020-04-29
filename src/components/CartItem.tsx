@@ -19,18 +19,20 @@ const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, item
     const [quantity, setQuantity] = useState(1);
     const [discount, setDiscount] = useState('0');
     const [price, setPrice] = useState(0);
+    const [hasComment, setHasComment] = useState(false);
+
 
 
     let itemImages: any = getDeviceImagesPath(cartItem.images)
 
-    //console.warn(cartItem)
+    console.warn(cartItem)
 
-    const fieldItem = () => {
+    const fieldItem = (headline: string, price: number) => {
         return(
             <View style={styles.fieldItemMainContainer}>
-                <Text>{'headline'}</Text>
+                <Text>{headline}</Text>
                 <View style={styles.fieldItemContainer}>
-                    <Text>{'price'}</Text>
+                    <Text>{price}</Text>
                 </View>
             </View>
         )
@@ -68,12 +70,8 @@ const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, item
                         <View style={styles.cardSectionLeft}>
                             <View style={styles.fields}>
                                 
-                                    {fieldItem()}
-                                    {fieldItem()}
-                                    {fieldItem()}
-                                    {fieldItem()}
-                                    {fieldItem()}
-                             
+                                {fieldItem(cartItem.rentOrSale,cartItem.price)}        
+                    
                             </View>
 
                             <View style={styles.discountView}>
@@ -174,9 +172,24 @@ const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, item
                     
                    </View>
                     
+                    {hasComment? 
                     <View style={styles.comments}>
-                            <Text>{'product comment'}</Text>
-                    </View>
+                            <TextInput multiline style={styles.commentInput}/>
+                    </View>: 
+                    <TouchableOpacity
+                    style={{alignSelf: 'flex-end'}}
+                    onPress={()=>{
+                        setHasComment(true)
+                    }}>
+                        <View style={{margin: 16}}>
+                          <Image
+                            style={styles.iconImage}
+                            resizeMode="contain"
+                            source={images.edit}/>    
+                        </View>    
+                    </TouchableOpacity>
+                    }
+                    
                 </View>              
         <View style={styles.imageSection}>
                 <Image
@@ -255,8 +268,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     iconImage: {
-        width: 32,
-        height: 32
+        width: 24,
+        height: 24
     }, 
     counterText: {
         fontSize: 20,
@@ -343,6 +356,9 @@ const styles = StyleSheet.create({
     dataContainer: {
         flexDirection: 'column', 
         flex: 4
+    },
+    commentInput: {
+        textAlign: 'right'
     }
 })
 

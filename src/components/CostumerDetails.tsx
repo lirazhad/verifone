@@ -71,12 +71,12 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
         <View style={styles.section}>
            <CostumerInputForm 
             headline={t('lastName')}
-            placeHolder={'jhh'}
+            placeHolder={t('enterLastName')}
             onChangeText={()=>{}}
            />
            <CostumerInputForm 
             headline={t('firstName')}
-            placeHolder={'jhh'}
+            placeHolder={t('enterFirstName')}
             onChangeText={()=>{}}
            />
         </View>
@@ -84,13 +84,26 @@ const CostumerDetails: React.FC<IProps> = inject("itemStore")(observer(({})=> {
         <View style={{marginLeft: 18}}>
            <CostumerInputForm 
             headline={t('companyName')}
-            placeHolder={'jhh'}
+            placeHolder={t('enterComponyName')}
             onChangeText={()=>{}}
            /> 
         </View>
 
         <View style={styles.section}>
             <RadioButtons onChange={(selected)=>{ console.warn(selected)}} />
+        </View>
+
+        <View style={styles.section}>
+           <CostumerInputForm 
+            headline={t('email')}
+            placeHolder={t('enterEmail')}
+            onChangeText={()=>{}}
+           />
+           <CostumerInputForm 
+            headline={t('phone')}
+            placeHolder={t('enterPhone')}
+            onChangeText={()=>{}}
+           />
         </View>
         
         <View style={styles.section}>

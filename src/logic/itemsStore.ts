@@ -98,6 +98,7 @@ export class ItemStore {
     async fetchData() {
         let terminals = this.terminals
         let cashRegister = this.cashRegister
+        let relatedProducts = this.relatedProducts
         let imagesPathKeyValue = this.imagesPathKeyValue
 
         this.activityIndecator = true
@@ -112,6 +113,10 @@ export class ItemStore {
                 }
                 if(data[key].categories[0]==="מסופים ופתרונות ניידים"){
                     cashRegister.push(data[key])
+                    downloadImages(data[key].images, imagesPathKeyValue)
+                }
+                if(data[key].categories[0]==="ציוד נלווה"){
+                    relatedProducts.push(data[key])
                     downloadImages(data[key].images, imagesPathKeyValue)
                 }
             });
