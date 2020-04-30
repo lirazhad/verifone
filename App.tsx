@@ -19,7 +19,12 @@ import { getDataFromDevice } from './src/data/dataManager'
 export const itemStore = new ItemStore()
 
 const App = () => {
-    const isModalVisible = useSelector((state: RootState) => state.app.isModalVisible);
+
+    const isModalVisible = useSelector((state: RootState) => {
+       setTimeout(() => {
+          state.app.isModalVisible
+       }, 2000);
+    });
     const dispatch: AppDispatch = useDispatch();
     const {isConnected} = useNetInfo();
 

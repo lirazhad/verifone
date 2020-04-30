@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import {Colors} from '../../styles';
 import {NavigationScreenProp} from 'react-navigation';
 import {NavigationStackProp} from 'react-navigation-stack';
@@ -10,6 +10,7 @@ import NavigationService from '../../services/NavigationServices';
 import { screenHeight, screenWidth } from '../../constants/utils'
 import {images} from '../../../assets/images'
 import { getDeviceImagesPath } from '../../constants/utils'
+import ListItem from '../../components/ListItem'
 
 interface IProps extends NavigationScreenProp<object> {
     navigation: NavigationStackProp<null>;
@@ -22,6 +23,15 @@ const ItemScreen: React.FC<IProps> = observer(({navigation}) => {
 
     const { addToCart, item, itemStore } = navigation.state.params
     let itemImages: any = getDeviceImagesPath(item.images)
+
+    const [relatedItems, setRelatedItems] = useState(true);
+
+    useEffect(()=>{
+        item.relatedIds.forEach((relatedId: number) =>{
+
+              // setRelatedItems from item store
+        })
+    }, [])
 
     return (
         <>
@@ -129,7 +139,25 @@ const ItemScreen: React.FC<IProps> = observer(({navigation}) => {
                 {item.shortDescription}
                 </Text>  
             </View>
-             
+
+            
+            {/* <FlatList
+                data={item}
+                numColumns={3}
+                renderItem={(item: any) =>{
+                return (
+                <ListItem
+                item={item.item} 
+                onItemPress={()=>{
+                    navigation.navigate('ItemScreen',
+                    {
+                    'item': item.item, 
+                    'addToCart': itemStore.addToCart,
+                    'itemStore': itemStore
+                })}}
+                onSelect={itemStore.addToCart}/>)
+                }}
+            /> */}
         </ScrollView>
 
         </>

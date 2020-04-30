@@ -23,6 +23,7 @@ export class ItemStore {
        setTimeout(async () => {
          storeDataToDevice('terminals', JSON.stringify(this.terminals))
          storeDataToDevice('cashRegister', JSON.stringify(this.cashRegister))
+         storeDataToDevice('relatedProducts', JSON.stringify(this.relatedProducts))
 
          let imagesPathKeyValueObj = {}
          this.imagesPathKeyValue.forEach((value, key)=>{
@@ -44,6 +45,10 @@ export class ItemStore {
         then((value)=>{
             this.cashRegister.replace(JSON.parse(value))
         })
+        getDataFromDevice('relatedProducts').
+        then((value)=>{
+            this.relatedProducts.replace(JSON.parse(value))
+        })
 
         let imagesPathKeyValue = this.imagesPathKeyValue 
         getDataFromDevice('imagesPathKeyValue').
@@ -51,9 +56,7 @@ export class ItemStore {
             let imagesPath = JSON.parse(value)
             Object.keys(imagesPath).forEach(function(key){
                 imagesPathKeyValue.set(key, imagesPath[key])
- 
             })
-       
         })
     }
 
