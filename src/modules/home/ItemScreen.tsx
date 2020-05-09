@@ -26,12 +26,12 @@ const ItemScreen: React.FC<IProps> = observer(({navigation}) => {
 
     const [relatedItems, setRelatedItems] = useState(true);
 
-    useEffect(()=>{
-        item.relatedIds.forEach((relatedId: number) =>{
+    // useEffect(()=>{
+    //     item.relatedIds.forEach((relatedId: number) =>{
 
-              // setRelatedItems from item store
-        })
-    }, [])
+    //           // setRelatedItems from item store
+    //     })
+    // }, [])
 
     return (
         <>

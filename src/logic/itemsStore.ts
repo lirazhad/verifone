@@ -53,6 +53,8 @@ export class ItemStore {
         let imagesPathKeyValue = this.imagesPathKeyValue 
         getDataFromDevice('imagesPathKeyValue').
         then((value)=>{
+            console.log(value)
+
             let imagesPath = JSON.parse(value)
             Object.keys(imagesPath).forEach(function(key){
                 imagesPathKeyValue.set(key, imagesPath[key])
@@ -110,15 +112,15 @@ export class ItemStore {
             terminals.length = 0
             cashRegister.length = 0
              Object.keys(data).forEach(function(key: any){
-                if(data[key].categories[0]==="קופות רושמות וממוחשבות"){
+                if(data[key].categories.includes(203)){
                     terminals.push(data[key])
                     downloadImages(data[key].images, imagesPathKeyValue)
                 }
-                if(data[key].categories[0]==="מסופים ופתרונות ניידים"){
+                if(data[key].categories.includes(198)){
                     cashRegister.push(data[key])
                     downloadImages(data[key].images, imagesPathKeyValue)
                 }
-                if(data[key].categories[0]==="ציוד נלווה"){
+                if(data[key].categories.includes(200)){
                     relatedProducts.push(data[key])
                     downloadImages(data[key].images, imagesPathKeyValue)
                 }

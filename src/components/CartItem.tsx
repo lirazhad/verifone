@@ -30,12 +30,13 @@ const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, item
     const fieldItem = (headline: string, price: number) => {
         return(
             <View style={styles.fieldItemMainContainer}>
-                <Text>{headline}</Text>
+                <Text>{t(headline)}</Text>
                 <View style={styles.fieldItemContainer}>
-                    <Text>{price}</Text>
+                    <Text>{'₪ ' + price}</Text>
                 </View>
             </View>
         )
+    
     }
 
     useEffect(() => {
@@ -70,8 +71,9 @@ const CartItem: React.FC<IProps> = inject("itemStore")(observer(({cartItem, item
                         <View style={styles.cardSectionLeft}>
                             <View style={styles.fields}>
                                 
-                                {fieldItem(cartItem.rentOrSale,cartItem.price)}        
-                    
+                                {/* add fields by demend */}
+                                {fieldItem('salePrice', cartItem.price)}    
+                                
                             </View>
 
                             <View style={styles.discountView}>

@@ -51,7 +51,9 @@ const resources = {
             enterComponyName: 'הכניסו שם חברה',
             enterPhone: 'הכניסו טלפון',
             enterEmail: 'הכניסו מייל',
-            relatedProducts: 'מוצרים נלווים'
+            relatedProducts: 'מוצרים נלווים',
+            salePrice: 'מחיר מכירה',
+            monthlyPrice: 'עלות חודשית'
         }
     }
 };
